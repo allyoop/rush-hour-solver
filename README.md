@@ -5,13 +5,13 @@ Final project for SFU course CMPT 225: Data Structures and Algorithms.
 Designed and implemented by Kyle (Qikai) Shi and Allyson Ugalde.
 
 Takes input as a .txt file with a Rush Hour puzzle.
-`e.g.
-AA...O
-.....O
-XX...O
-...QQQ
-....CC
-..RRR.`
+`e.g./n
+AA...O/n
+.....O/n
+XX...O/n
+...QQQ/n
+....CC/n
+..RRR./n`
 
 Outputs a solution file in the following format.
 `e.g.

@@ -1,0 +1,28 @@
+CMPT 225 - Final Project (Documentation)        by Qikai Kyle Shi & Allyson Ugalde
+
+Our algorithm for this project was split into two main portions:
+1. Initialization and analysis of the first board
+2. A breadth first search of all possible configurations from the initial board
+
+Part (2) consists of a loop of the following processes for each board in the queue, which continues until it reaches a board that is solved:
+a) A check if the current board is solved/has the end condition
+b) An analysis of the current board (mainly looking at where the cars are in said board)
+c) Creating a new board for each movement of a car by 1 space in each valid direction, and adding the board to the queue
+d) Move on to the next board in the queue
+
+We implemented a total of 3 classes: BoardState, Car, and Solver.
+BoardState - Each instance represents an individual state of the board
+             which holds the 2D board, the parent BoardState (the one previous to this), and the parent move (the move taken to get from the parent to the current BoardState, e.g. "QL1")
+Car - Each instance represents an single car in the board
+      which holds the char that represents the car, the direction is moves, it's length, and it's top/left coordinates
+Solver - The BFS algorithm that solves the puzzle
+
+We decided to create two classes for different aspects of the puzzle (BoardState and Car) to better organize the data.
+Since we would be handling multiple boards and cars, both with multiple attributes that we want to keep track of, we decided it was best to make new classes that held these attributes.
+This made it easier for us to reference attributes of different instances of both BoardState and Car.
+Both BoardState.java and Car.java were easy to implement, as its methods were simple constructors, setters, getters, and equals.
+
+The difficult parts of the project was implementing the BFS and any heuristics.
+The BFS had to consider many "changed" boards from each board in the queue:
+- For each car, and for each (one-block) move in each direction (either up/down or left/right), if it's a legal move, create a new BoardState and add it to the queue
+This would add up to 2m boards (where m = the number of cars) for each board being analyzed, making a plain BFS have a running time of O(n*m), where n = number of boards.

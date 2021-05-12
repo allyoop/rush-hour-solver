@@ -1,0 +1,30 @@
+CMPT 225 - Final Project (Documentation)        by Qikai Kyle Shi (301370018) & Allyson Ugalde (301430745)
+
+Our algorithm for this project was split into two main portions:
+1. Initialization and analysis of the first board
+2. A breadth first search of all possible configurations from the initial board with aid from heuristics (A*)
+
+Part (2) consists of a loop of the following processes for each board in the queue, which continues until it reaches a board that is solved:
+a) A check if the current board is solved/has the end condition
+b) An analysis of the current board (mainly looking at where the cars are in said board)
+c) Creating a new board for each movement of a car by 1 space in each valid direction, and adding the board to the queue (before adding to the queue, check to see if it's a repeat)
+d) Move on to the next board in the queue
+
+We implemented a total of 3 classes: BoardState, Car, and Solver.
+BoardState - Each instance represents an individual state of the board
+             which holds the 2D board, the parent BoardState (the one previous to this), and the parent move (the move taken to get from the parent to the current BoardState, e.g. "QL1")
+Car - Each instance represents an single car in the board
+      which holds the char that represents the car, the direction is moves, it's length, and it's top/left coordinates
+Solver - The BFS algorithm that solves the puzzle
+
+In terms of heuristics. We used two, one that calculates the cost based on the number of vehicles between the XX car and the end point; two, calculates the cost based on how far the XX car is from the end point. In terms of usefulness, when both heuristics are applied at the same time, we were able to achieve the best results. However, the first heuristic by itself reduced the runtime more than the secone one. It is obvious that certain heuristics are more suited for certain puzzles, as certain conditions don't necessarily imply the most efficent way to reach the end point. For example, in certain puzzles, the XX car may need to back up before it can advance to the end point, or a car may need to get in front of the XX car first, then be removed in order to reach the end point. In those situations, having individual heuristics would usually mean having additional checks, however, by taking an avarage or combining the cost of multiple heuristics, we are able to mitigate this problem. 
+
+We decided to create two classes for different aspects of the puzzle (BoardState and Car) to better organize the data. Since we would be handling multiple boards and cars, both with multiple attributes that we want to keep track of, we decided it was best to make these new classes that held these attributes. This made it easier for us to reference attributes of different instances of both BoardState and Car. Both BoardState.java and Car.java were easy to implement, as its methods were simple constructors, setters, getters, and equals. The difficult part of the project was debugging and implementing the heuristics, as it was extremely difficult to find the mistakes when we first implemented A* but were not getting the desired results, and involved a lot of creating our own edge test cases to locate the bugs. 
+
+We initially wrote the program in a non static manner, when we realized that it needed to be static, we had to rewrite the original one by adding new methods to modify data. 
+
+
+*Contribution for each file:
+Car.java - Kyle
+BroadState.java - Ally
+Solver.java - Kyle & Ally
